@@ -9,8 +9,79 @@ export class GuiModel {
 
     private _guiModel = {
         "application": {
-            "title": "Requirements Engineering Friend Tracker",
+            "title": "The Friends Tracker",
             "formList": [
+				{
+					"id": "AddActivity",
+					"title": "Activity",
+					"formFieldList": [
+						{
+							"id": "Activityname",
+							"type": "text",
+							"name": "Name",
+							"width": 2,
+							"required": true
+						},
+						{
+							"id": "Activitydate",
+							"type": "date",
+							"name": "Date",
+							"width": 1,
+							"required": true
+						},
+						{
+							"id":   "Activitylocation",
+                            "type": "autocomplete",
+                            "name": "Location",
+                            "data": [ "Winterthur", "Zürich" ],
+                            "form": "GroupForm",
+                            "width": 1,
+						},
+						{
+							"id": "Activitycomments",
+							"type": "text",
+							"name": "Comments",
+							"width": 2,
+						},
+						{	
+							"type": "deleteButton",
+							"name": "Delete"
+						},
+						{
+							"type": "cancelButton",
+							"name": "Cancel"
+						},
+						{
+							"type": "okButton",
+							"name": "Ok"
+						},	
+					]
+				},
+				{
+					"id": "GroupForm",
+					"title": "Group",
+					"formFieldList": [
+						{
+							"id": "name",
+							"type": "text",
+							"name": "GroupName",
+							"width": 2,
+							"required": true
+						},
+						{	
+							"type": "deleteButton",
+							"name": "Delete"
+						},
+						{
+							"type": "cancelButton",
+							"name": "Cancel"
+						},
+						{
+							"type": "okButton",
+							"name": "Ok"
+						}						
+					]
+				},
                 {
                     "id": "FriendForm",
                     "title": "Friend",
@@ -29,6 +100,20 @@ export class GuiModel {
                             "width": 1,
                             "required": true
                         },
+						{	"id": "nickname",
+							"type": "text",
+							"name": "Nickname",
+							"width": 2,
+							"required": true
+						},
+						{
+							"id": "group",
+							"type": "autocomplete",
+							"name": "Group",
+							"data": [ "Study", "Family", "School"],
+							"form": "GroupForm",
+							"width": 2
+						},							
                         {
                             "id":   "location",
                             "type": "autocomplete",
@@ -89,7 +174,8 @@ export class GuiModel {
                             "name": "Ok"
                         }
                     ]
-                }
+                },
+				
             ],
             "pageList": [
                 {
@@ -110,6 +196,13 @@ export class GuiModel {
                             "color": "yellow",
                             "page": "locationspage",
                         },
+						{
+							"type": "button",
+							"name": "Groups",
+							"icon": "fa-weixin",
+							"color": "wisteria",
+							"page": "groupspage",
+						}							
                     ]
                 },
                 {
@@ -133,10 +226,8 @@ export class GuiModel {
                             "color": "blue",
                             "search": true,
                             "data": [ { name: "Anton Amacker" }, { name: "Britta Beavers"} ],
-                            "form": {
-                                "form": "FriendForm"
-                            }
-                        },
+                            "page": "friendsactivitypage"                                
+                        }
                     ]
                 },
                 {
@@ -165,8 +256,70 @@ export class GuiModel {
                             }
                         },
                     ]
-                }
-            ]
+                },
+				{
+					"id": "groupspage",
+					"elementList": [
+					{
+						"type": "backbutton",
+					},
+					{
+						"type": "newButton",
+						"name": "NewGroup",
+						"icon": "fa-weixin",
+						"color": "green",
+						"form": {
+							"form": "GroupForm"
+						}
+					},
+					{
+						"type": "list",
+						"icon": "fa-weixin",
+						"color": "wisteria",
+						"data": [ { name: "Study" }, { name: "Family" }, {name: "School"} ],
+						"form": {
+							"form": "GroupForm"
+						}
+					}
+			
+					]
+				},
+				{
+					"id": "friendsactivitypage",
+					"elementList":[
+					{
+						"type": "backbutton",
+					},
+					{
+						"type": "newButton",
+						"name": "EditFriend",
+						"icon": "fa-user",
+						"color": "green",
+						"form":{
+							"form": "FriendForm"
+						}
+					},
+					{
+						"type": "newButton",
+						"name": "AddActivity",
+						"icon": "fa-calendar",
+						"color": "green",
+						"form": {
+							"form": "AddActivity"
+						}
+					},
+					{
+						"type": "list",
+						"icon": "fa-calendar",
+						"color": "carrot",
+						"data": [ { name: "Movie Why Him"}, {name: "Eating Pizza"}, {name: "Running Eschenberg"} ],
+						"form": {
+							"form": "AddActivity"
+						}
+					}
+					]
+				}				
+			]			
         }
     };
 
